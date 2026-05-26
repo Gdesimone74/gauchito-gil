@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gauchito Gil — El latido rojo de nuestra identidad</title>
+  <meta name="description" content="Proyecto cultural dedicado a preservar y difundir la memoria viva del Gauchito Gil. La leyenda del gaucho correntino que desafió a su tiempo." />
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- CURSOR PERSONALIZADO -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <!-- ========== NAV ========== -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-cruz">✞</span> Gauchito Gil
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero" class="nav-link active">Inicio</a></li>
+        <li><a href="#historia" class="nav-link">La Historia</a></li>
+        <li><a href="#galeria" class="nav-link">Galería</a></li>
+        <li><a href="#altar" class="nav-link">Altar Digital</a></li>
+        <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section id="hero">
+    <canvas id="particlesCanvas"></canvas>
+    <div class="hero-content">
+      <p class="hero-pre">⚡ Proyecto Cultural</p>
+      <h1 class="hero-titulo" id="heroTitulo">GAUCHITO GIL</h1>
+      <p class="hero-subtitulo">El latido rojo de nuestra identidad</p>
+      <p class="hero-descripcion">
+        Antonio Mamerto Gil Núñez — El gaucho que eligió no matar.<br />
+        Una leyenda que late en cada banderita roja del país.
+      </p>
+      <a href="#historia" class="btn-hero">Descubrí su historia</a>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ========== HISTORIA ========== -->
+  <section id="historia">
+    <div class="historia-container">
+      <div class="historia-header">
+        <h2 class="section-titulo rojo">La historia sin fin</h2>
+        <p class="section-subtitulo">
+          Antonio Mamerto Gil Núñez — El gaucho que eligió no matar
+        </p>
+      </div>
+
+      <div class="historia-columnas">
+        <div class="historia-col" data-delay="0">
+          <h3>El hombre</h3>
+          <p>
+            Detrás de las banderas rojas, late la leyenda de un hombre de carne y hueso
+            que desafió a su tiempo. Nacido en los campos correntinos, Antonio Mamerto Gil
+            Núñez creció como trabajador rural, conociendo desde temprano la dureza del
+            campo y la injusticia social que marcaba a los más pobres.
+          </p>
+          <p>
+            Su vida, sus amores y su forma de relacionarse con los humildes lo convirtieron
+            en una figura querida en su comunidad. Era conocido por compartir lo poco que
+            tenía con los que menos tenían aún.
+          </p>
+        </div>
+        <div class="historia-col" data-delay="0.15">
+          <h3>La decisión</h3>
+          <p>
+            Cuando el gobierno lo reclutó forzosamente para las montoneras que sembraban
+            terror en la región, Gil se negó a matar a sus propios hermanos. Desertó del
+            ejército, no por cobardía sino por convicción: no levantaría el arma contra
+            los suyos.
+          </p>
+          <p>
+            Se convirtió en prófugo. Vagó por los montes correntinos, escondiéndose de las
+            partidas militares que lo buscaban. Según la tradición oral, durante ese tiempo
+            robaba a los estancieros ricos para dar a los campesinos pobres — el Robin Hood
+            del litoral argentino.
+          </p>
+        </div>
+        <div class="historia-col" data-delay="0.3">
+          <h3>El milagro</h3>
+          <p>
+            El 8 de enero de 1878, fue capturado y ejecutado colgado de un árbol de
+            cabeza. Antes de morir, le dijo a uno de sus captores que su hijo enfermo
+            sanaría si le rezaba. El hijo sanó. Desde entonces, los milagros se
+            multiplicaron y la devoción popular creció incontenible.
+          </p>
+          <p>
+            Hoy su santuario en Mercedes, Corrientes, recibe más de 400.000 fieles
+            cada enero. Su imagen, vestida de rojo y azul, preside altares en camiones,
+            casas, y rincones de todo el país. Es fe que la Iglesia no pudo encasillar.
+          </p>
+        </div>
+      </div>
+
+      <!-- LÍNEA DE TIEMPO -->
+      <div class="timeline">
+        <div class="timeline-line"></div>
+        <div class="timeline-punto" data-index="0">
+          <div class="punto-circulo"></div>
+          <div class="punto-contenido">
+            <span class="punto-fecha">~1840</span>
+            <span class="punto-texto">Nacimiento en Corrientes</span>
+          </div>
+        </div>
+        <div class="timeline-punto" data-index="1">
+          <div class="punto-circulo"></div>
+          <div class="punto-contenido">
+            <span class="punto-fecha">1874–1877</span>
+            <span class="punto-texto">La deserción y la fuga</span>
+          </div>
+        </div>
+        <div class="timeline-punto" data-index="2">
+          <div class="punto-circulo"></div>
+          <div class="punto-contenido">
+            <span class="punto-fecha">8 ene. 1878</span>
+            <span class="punto-texto">La ejecución — el milagro</span>
+          </div>
+        </div>
+        <div class="timeline-punto" data-index="3">
+          <div class="punto-circulo"></div>
+          <div class="punto-contenido">
+            <span class="punto-fecha">Hoy</span>
+            <span class="punto-texto">El mito vivo — 400.000 devotos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="parallax-image" id="parallaxImg">
+        <div class="parallax-overlay">
+          <blockquote>
+            "Si me matás, tu hijo enfermo va a sanar si le pedís por mi sangre."
+            <cite>— Antonio Gil, según la tradición oral</cite>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GALERÍA ========== -->
+  <section id="galeria">
+    <div class="galeria-container">
+      <h2 class="section-titulo blanco">Los rostros de la fe</h2>
+      <p class="section-subtitulo claro">
+        Imágenes de los santuarios y devotos de todo el país
+      </p>
+      <div class="galeria-grid">
+        <div class="galeria-card" data-index="0">
+          <div class="card-img placeholder-img" style="background: linear-gradient(135deg, #4a0000, #8B0000);"></div>
+          <div class="card-overlay">
+            <p>Santuario de Mercedes, Corrientes</p>
+          </div>
+        </div>
+        <div class="galeria-card" data-index="1">
+          <div class="card-img placeholder-img" style="background: linear-gradient(135deg, #2a0000, #CC0000);"></div>
+          <div class="card-overlay">
+            <p>Las banderitas rojas — símbolo de fe</p>
+          </div>
+        </div>
+        <div class="galeria-card" data-index="2">
+          <div class="card-img placeholder-img" style="background: linear-gradient(135deg, #1a0000, #990000);"></div>
+          <div class="card-overlay">
+            <p>Altar popular en Buenos Aires</p>
+          </div>
+        </div>
+        <div class="galeria-card" data-index="3">
+          <div class="card-img placeholder-img" style="background: linear-gradient(135deg, #3a0000, #AA0000);"></div>
+          <div class="card-overlay">
+            <p>Devotos en la peregrinación anual</p>
+          </div>
+        </div>
+        <div class="galeria-card" data-index="4">
+          <div class="card-img placeholder-img" style="background: linear-gradient(135deg, #5a0000, #DD0000);"></div>
+          <div class="card-overlay">
+            <p>Las velas rojas — ofrenda y petición</p>
+          </div>
+        </div>
+        <div class="galeria-card" data-index="5">
+          <div class="card-img placeholder-img" style="background: linear-gradient(135deg, #2a0000, #7B0000);"></div>
+          <div class="card-overlay">
+            <p>Arte popular — su imagen en los barrios</p>
+          </div>
+        </div>
+      </div>
+      <div class="galeria-cta">
+        <a href="#" class="btn-secundario">Ver todas las fotos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ALTAR DIGITAL ========== -->
+  <section id="altar">
+    <div class="altar-container">
+      <div class="altar-header">
+        <h2 class="section-titulo dorado">Encendé tu vela</h2>
+        <p class="section-subtitulo claro">
+          Dejá tu petición o agradecimiento al Gauchito Gil.<br />
+          <span id="contadorVelas">0</span> devotos ya encendieron su vela.
+        </p>
+      </div>
+
+      <!-- CANVAS DEL ALTAR -->
+      <div id="altarWrapper">
+        <canvas id="altarCanvas"></canvas>
+      </div>
+
+      <!-- FORMULARIO -->
+      <div class="altar-form-container">
+        <h3>✞ Encendé una vela</h3>
+        <form id="altarForm" autocomplete="off">
+          <div class="form-group">
+            <label for="nombreDevoto">Tu nombre</label>
+            <input
+              type="text"
+              id="nombreDevoto"
+              placeholder="¿Cómo te llamás?"
+              maxlength="40"
+            />
+          </div>
+          <div class="form-group">
+            <label for="peticionDevoto">Tu petición o agradecimiento</label>
+            <textarea
+              id="peticionDevoto"
+              placeholder="Contale algo al Gauchito..."
+              rows="3"
+              maxlength="200"
+            ></textarea>
+          </div>
+          <button type="submit" id="encenderVelaBtn" class="btn-altar">
+            🕯️ Encender vela
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIOS ========== -->
+  <section id="testimonios">
+    <div class="testimonios-container">
+      <h2 class="section-titulo rojo">Las voces que lo mantienen vivo</h2>
+      <p class="section-subtitulo">
+        La tradición oral como pilar de su leyenda
+      </p>
+
+      <div class="testimonios-grid">
+        <div class="testimonio-card" data-delay="0">
+          <div class="quote-mark">"</div>
+          <p class="quote-texto">
+            Me quedé sin trabajo, le pedí al Gauchito y en dos semanas conseguí
+            uno mejor. Desde entonces nunca falta una banderita roja en mi camión.
+          </p>
+          <div class="quote-autor">
+            <strong>Roberto M.</strong>
+            <span>Camionero — Rosario, Santa Fe</span>
+          </div>
+        </div>
+
+        <div class="testimonio-card" data-delay="0.15">
+          <div class="quote-mark">"</div>
+          <p class="quote-texto">
+            Mi hijo estaba muy enfermo, los médicos no daban muchas esperanzas.
+            Recé con toda mi fe y él se recuperó. El Gauchito hace milagros para
+            los que creen de verdad.
+          </p>
+          <div class="quote-autor">
+            <strong>María Elena C.</strong>
+            <span>Ama de casa — Mercedes, Corrientes</span>
+          </div>
+        </div>
+
+        <div class="testimonio-card" data-delay="0.3">
+          <div class="quote-mark">"</div>
+          <p class="quote-texto">
+            Vengo todos los 8 de enero desde hace doce años. No importa cuánto
+            tenga que viajar. Es una promesa que hice y que voy a cumplir siempre.
+            El Gauchito es de los pobres, de nosotros.
+          </p>
+          <div class="quote-autor">
+            <strong>Jorge "El Pato" R.</strong>
+            <span>Peregrino — Buenos Aires</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ESTADÍSTICAS -->
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-numero" data-target="400000">0</span>
+          <span class="stat-label">devotos cada enero en Mercedes</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-numero" data-target="147">0</span>
+          <span class="stat-label">años de devoción popular</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-numero" data-target="23">0</span>
+          <span class="stat-label">provincias con santuarios</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACTO / FOOTER ========== -->
+  <section id="contacto">
+    <div class="contacto-banner">
+      <h2>¿Querés compartir tu historia?</h2>
+      <p>Este proyecto se construye con las voces de los devotos</p>
+      <a href="mailto:contacto@gauchitogil.ar" class="btn-hero">Escribinos</a>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-logo">✞ Gauchito Gil</div>
+        <p>Proyecto cultural dedicado a preservar y difundir la memoria viva del Gauchito Gil. La leyenda del gaucho que eligió no matar.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Secciones</h4>
+        <ul>
+          <li><a href="#historia">La Historia</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#altar">Altar Digital</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>El proyecto</h4>
+        <ul>
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Ciclo de entrevistas</a></li>
+          <li><a href="#">Bibliografía</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes</h4>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram">📷 Instagram</a>
+          <a href="#" aria-label="YouTube">▶️ YouTube</a>
+          <a href="#" aria-label="Facebook">👥 Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>✞ Proyecto cultural — Tesis de grado · Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/particles.js" defer></script>
+  <script src="js/altar.js" defer></script>
+  <script src="js/main.js" defer></script>
+
+</body>
+</html>
