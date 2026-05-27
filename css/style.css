@@ -233,11 +233,13 @@ ul  { list-style: none; }
 
 .hero-titulo {
   font-family: var(--font-titulo);
-  font-size: clamp(3rem, 8vw, 4.5rem);
+  /* 9vw escala con el ancho: en móvil 375px → 33px, en desktop 1280px → cap 5rem=80px */
+  font-size: clamp(1.5rem, 9vw, 5rem);
   font-weight: 900;
   line-height: 1.05;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   white-space: nowrap;
+  overflow: visible;
   color: var(--crema);
   text-shadow: 0 0 60px rgba(204,0,0,0.6), 0 2px 4px rgba(0,0,0,0.8);
   margin-bottom: 0.3em;
