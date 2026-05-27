@@ -488,6 +488,111 @@ blockquote cite {
 .galeria-cta { margin-top: 2.5rem; }
 
 /* ════════════════════════════════════════════════════════════
+   MAPA DE SANTUARIOS
+   ════════════════════════════════════════════════════════════ */
+#mapa {
+  background: var(--negro);
+  padding: 7rem 2rem 5rem;
+}
+
+.mapa-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.mapa-header {
+  margin-bottom: 2.5rem;
+}
+
+#mapaLeaflet {
+  width: 100%;
+  height: 540px;
+  border-radius: var(--radio);
+  border: 2px solid var(--rojo-oscuro);
+  box-shadow: 0 0 40px rgba(139,0,0,0.35);
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Override estilos de Leaflet para el tema oscuro */
+.leaflet-container {
+  background: #1a0000 !important;
+  font-family: var(--font-cuerpo) !important;
+}
+
+/* Popup personalizado */
+.leaflet-popup-content-wrapper {
+  background: rgba(15, 2, 2, 0.97) !important;
+  border: 1px solid var(--rojo-oscuro) !important;
+  border-radius: var(--radio) !important;
+  color: var(--crema) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.7) !important;
+}
+.leaflet-popup-tip {
+  background: var(--rojo-oscuro) !important;
+}
+.leaflet-popup-content {
+  margin: 14px 18px !important;
+}
+.popup-titulo {
+  font-family: var(--font-titulo);
+  font-size: 1rem;
+  color: var(--dorado);
+  margin-bottom: 0.3em;
+}
+.popup-tipo {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rojo);
+  margin-bottom: 0.5em;
+}
+.popup-desc {
+  font-size: 0.88rem;
+  color: rgba(245,240,232,0.85);
+  line-height: 1.5;
+}
+
+/* Leyenda */
+.mapa-leyenda {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--gris);
+}
+.leyenda-dot {
+  display: inline-block;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+.leyenda-dot.principal { width: 16px; height: 16px; background: var(--dorado); }
+.leyenda-dot.grande    { width: 13px; height: 13px; background: var(--rojo); }
+.leyenda-dot.chico     { width: 9px;  height: 9px;  background: #8B2020; }
+
+/* Zoom controls oscuros */
+.leaflet-control-zoom a {
+  background: #1a0000 !important;
+  color: var(--crema) !important;
+  border-color: var(--rojo-oscuro) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: var(--rojo-oscuro) !important;
+}
+.leaflet-control-attribution {
+  background: rgba(10,0,0,0.75) !important;
+  color: #666 !important;
+}
+.leaflet-control-attribution a { color: #888 !important; }
+
+/* ════════════════════════════════════════════════════════════
    ALTAR DIGITAL
    ════════════════════════════════════════════════════════════ */
 #altar {

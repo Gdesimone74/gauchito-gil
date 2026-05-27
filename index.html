@@ -14,6 +14,9 @@
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -33,6 +36,7 @@
         <li><a href="#hero" class="nav-link active">Inicio</a></li>
         <li><a href="#historia" class="nav-link">La Historia</a></li>
         <li><a href="#galeria" class="nav-link">Galería</a></li>
+        <li><a href="#mapa" class="nav-link">Santuarios</a></li>
         <li><a href="#altar" class="nav-link">Altar Digital</a></li>
         <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
         <li><a href="#contacto" class="nav-link">Contacto</a></li>
@@ -213,6 +217,31 @@
     </div>
   </section>
 
+  <!-- ========== MAPA DE SANTUARIOS ========== -->
+  <section id="mapa">
+    <div class="mapa-container">
+      <div class="mapa-header">
+        <h2 class="section-titulo rojo">Los santuarios del país</h2>
+        <p class="section-subtitulo">
+          Más de 400 santuarios en todo el territorio argentino.<br />
+          Hacé click en un marcador para conocer su historia.
+        </p>
+      </div>
+      <div id="mapaLeaflet"></div>
+      <div class="mapa-leyenda">
+        <div class="leyenda-item">
+          <span class="leyenda-dot principal"></span> Santuario principal
+        </div>
+        <div class="leyenda-item">
+          <span class="leyenda-dot grande"></span> Santuario importante
+        </div>
+        <div class="leyenda-item">
+          <span class="leyenda-dot chico"></span> Oratorio / capilla
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== ALTAR DIGITAL ========== -->
   <section id="altar">
     <div class="altar-container">
@@ -375,6 +404,7 @@
   <!-- Scripts -->
   <script src="js/particles.js" defer></script>
   <script src="js/altar.js" defer></script>
+  <script src="js/mapa.js" defer></script>
   <script src="js/main.js" defer></script>
 
 </body>

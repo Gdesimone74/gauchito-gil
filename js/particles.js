@@ -1,61 +1,99 @@
 /**
  * particles.js — Gauchito Gil
- * Sistema de banderitas rojas flotando, como en los santuarios.
+ * Brasas / chispas que suben como de una vela o fogón.
  */
 
-class Banderita {
-  static COLORES = [
-    '#CC0000', '#8B0000', '#FF0000',
-    '#990000', '#B22222', '#C9A84C',
-  ];
-
+class Brasa {
   constructor(canvas) {
     this.canvas = canvas;
     this.reset();
+    // Distribuir al inicio por toda la altura
     this.y = Math.random() * canvas.height;
+    this.vida = Math.random();
   }
 
   reset() {
     const c = this.canvas;
-    this.x         = Math.random() * c.width;
-    this.y         = c.height + Math.random() * 40;
-    this.ancho     = 8  + Math.random() * 12;
-    this.alto      = 5  + Math.random() * 7;
-    this.color     = Banderita.COLORES[Math.floor(Math.random() * Banderita.COLORES.length)];
-    this.vy        = 0.4 + Math.random() * 0.8;
-    this.amplitud  = 20  + Math.random() * 40;
-    this.frecuencia= 0.01 + Math.random() * 0.02;
-    this.faseX     = Math.random() * Math.PI * 2;
-    this.angulo    = (Math.random() - 0.5) * 0.6;
-    this.vAngulo   = (Math.random() - 0.5) * 0.03;
-    this.opacidadBase = 0.4 + Math.random() * 0.5;
-    this.opacidad  = this.opacidadBase;
-    this.fasePulso = Math.random() * Math.PI * 2;
-    this.velPulso  = 0.01 + Math.random() * 0.02;
-    this.t         = Math.random() * 1000;
+    // Nacer desde la franja inferior
+    this.x    = c.width  * 0.1 + Math.random() * c.width  * 0.8;
+    this.y    = c.height * 0.7 + Math.random() * c.height * 0.3;
+    this.vida = 1;
+
+    // Velocidad: sube con leve deriva lateral
+    this.vy   = -(0.4 + Math.random() * 1.2);
+    this.vx   = (Math.random() - 0.5) * 0.6;
+
+    // Tamaño: mezcla de brasas chicas y grandes
+    this.r    = 0.8 + Math.random() * 3;
+
+    // Temperatura → color
+    // 0 = fría (rojo oscuro), 1 = caliente (blanco-amarillo)
+    this.temp = Math.random();
+
+    // Oscilación lateral suave
+    this.fase   = Math.random() * Math.PI * 2;
+    this.ampOsc = 0.3 + Math.random() * 0.8;
+    this.frOsc  = 0.03 + Math.random() * 0.04;
+
+    // Vida útil: las más grandes duran menos
+    this.decaimiento = 0.004 + Math.random() * 0.012;
+
+    this.t = 0;
   }
 
   update() {
-    this.t += 1;
-    this.y -= this.vy;
-    this.x += Math.sin(this.t * this.frecuencia + this.faseX) * 0.6;
-    this.angulo += this.vAngulo;
-    this.opacidad = this.opacidadBase +
-      Math.sin(this.t * this.velPulso + this.fasePulso) * 0.15;
-    this.opacidad = Math.max(0.2, Math.min(1, this.opacidad));
-    if (this.y < -this.alto - 10) this.reset();
+    this.t++;
+    this.y  += this.vy;
+    this.x  += this.vx + Math.sin(this.t * this.frOsc + this.fase) * this.ampOsc;
+    this.vy *= 0.995;         // leve desaceleración al subir
+    this.vida -= this.decaimiento;
+    this.r   *= 0.998;        // se achica gradualmente
+    if (this.vida <= 0 || this.y < -20) this.reset();
   }
 
   draw(ctx) {
+    const a = Math.max(0, this.vida);
+    // Color según temperatura
+    let color;
+    if (this.temp > 0.75) {
+      // Muy caliente: blanco-amarillo
+      color = `rgba(255, 245, 200, ${a})`;
+    } else if (this.temp > 0.5) {
+      // Caliente: naranja brillante
+      color = `rgba(255, ${Math.floor(150 + this.temp * 60)}, 20, ${a})`;
+    } else if (this.temp > 0.25) {
+      // Tibio: naranja-rojo
+      color = `rgba(255, ${Math.floor(60 + this.temp * 120)}, 0, ${a})`;
+    } else {
+      // Fría: rojo oscuro
+      color = `rgba(${Math.floor(180 + this.temp * 75)}, 20, 0, ${a * 0.7})`;
+    }
+
     ctx.save();
-    ctx.translate(this.x, this.y);
-    ctx.rotate(this.angulo);
-    ctx.globalAlpha = this.opacidad;
-    ctx.fillStyle   = this.color;
-    ctx.fillRect(-this.ancho / 2, -this.alto / 2, this.ancho, this.alto);
-    ctx.strokeStyle = 'rgba(0,0,0,0.25)';
-    ctx.lineWidth   = 0.5;
-    ctx.strokeRect(-this.ancho / 2, -this.alto / 2, this.ancho, this.alto);
+
+    // Halo de calor (glow)
+    if (this.r > 1.5 && this.vida > 0.3) {
+      const glow = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r * 4);
+      glow.addColorStop(0,   color.replace(')', ', 0.3)').replace('rgba(', 'rgba('));
+      glow.addColorStop(1,   'rgba(0,0,0,0)');
+      // Simplificado: solo glow en brasas grandes
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r * 4, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 100, 0, ${a * 0.08})`;
+      ctx.fill();
+    }
+
+    // Núcleo de la brasa
+    const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+    grad.addColorStop(0,   `rgba(255, 255, 220, ${a})`);
+    grad.addColorStop(0.4, color);
+    grad.addColorStop(1,   'rgba(100, 0, 0, 0)');
+
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = grad;
+    ctx.fill();
+
     ctx.restore();
   }
 }
@@ -64,19 +102,18 @@ class ParticleSystem {
   constructor(canvasId) {
     this.canvas = document.getElementById(canvasId);
     if (!this.canvas) return;
-    this.ctx        = this.canvas.getContext('2d');
-    this.banderitas = [];
-    this.cantidad   = 80;
-    this.animId     = null;
+    this.ctx     = this.canvas.getContext('2d');
+    this.brasas  = [];
+    this.cantidad = 120;
+    this.animId  = null;
     this.init();
   }
 
   init() {
     this._ajustarTamano();
     window.addEventListener('resize', () => this._ajustarTamano());
-    this.banderitas = [];
     for (let i = 0; i < this.cantidad; i++) {
-      this.banderitas.push(new Banderita(this.canvas));
+      this.brasas.push(new Brasa(this.canvas));
     }
     this.animate();
   }
@@ -88,11 +125,23 @@ class ParticleSystem {
 
   _dibujarFondo() {
     const { ctx, canvas } = this;
+    // Gradiente: negro arriba → rojo muy oscuro abajo
     const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-    grad.addColorStop(0,   '#0a0a0a');
-    grad.addColorStop(0.6, '#1a0000');
-    grad.addColorStop(1,   '#4a0000');
+    grad.addColorStop(0,    '#080808');
+    grad.addColorStop(0.55, '#120000');
+    grad.addColorStop(0.85, '#2a0000');
+    grad.addColorStop(1,    '#3d0000');
     ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Viñeta lateral suave
+    const vig = ctx.createRadialGradient(
+      canvas.width / 2, canvas.height * 0.6, canvas.height * 0.1,
+      canvas.width / 2, canvas.height * 0.6, canvas.width * 0.8
+    );
+    vig.addColorStop(0,   'rgba(80,0,0,0.15)');
+    vig.addColorStop(1,   'rgba(0,0,0,0.5)');
+    ctx.fillStyle = vig;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
@@ -100,7 +149,7 @@ class ParticleSystem {
     const { ctx, canvas } = this;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     this._dibujarFondo();
-    for (const b of this.banderitas) {
+    for (const b of this.brasas) {
       b.update();
       b.draw(ctx);
     }
