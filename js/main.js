@@ -52,20 +52,21 @@ function initHero() {
   const titulo = document.getElementById('heroTitulo');
   if (!titulo || !window.gsap) return;
 
-  // Dividir en letras
-  titulo.innerHTML = titulo.textContent
-    .split('')
-    .map(l => `<span class="letra" style="display:inline-block">${l === ' ' ? '&nbsp;' : l}</span>`)
-    .join('');
+  // Dividir en PALABRAS (no letras) para que nunca corte a mitad de una palabra
+  const palabrasTexto = titulo.textContent.trim().split(/\s+/);
+  titulo.innerHTML = palabrasTexto
+    .map(p => `<span class="palabra" style="display:inline-block; white-space:nowrap">${p}</span>`)
+    .join(' ');
 
-  const letras    = titulo.querySelectorAll('.letra');
+  const palabras  = titulo.querySelectorAll('.palabra');
   const subtitulo = document.querySelector('.hero-subtitulo');
   const desc      = document.querySelector('.hero-descripcion');
   const boton     = document.querySelector('.btn-hero');
 
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-  tl.from(letras, { y: 70, opacity: 0, duration: 0.7, stagger: 0.04 });
+  // Palabras aparecen desde abajo con stagger
+  tl.from(palabras, { y: 80, opacity: 0, duration: 0.8, stagger: 0.18 });
   if (subtitulo) tl.from(subtitulo, { opacity: 0, y: 20, duration: 0.8 }, '-=0.3');
   if (desc)      tl.from(desc,      { opacity: 0, y: 15, duration: 0.7 }, '-=0.5');
   if (boton)     tl.from(boton,     { opacity: 0, scale: 0.6, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.4');
