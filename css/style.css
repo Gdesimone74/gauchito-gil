@@ -233,18 +233,20 @@ ul  { list-style: none; }
 
 .hero-titulo {
   font-family: var(--font-titulo);
-  font-size: clamp(1.5rem, 8.5vw, 5rem);
+  font-size: clamp(3.5rem, 14vw, 7rem);
   font-weight: 900;
   line-height: 1.05;
-  letter-spacing: 0;
-  white-space: nowrap;
+  letter-spacing: 0.04em;
+  /* Sin nowrap: en mobile GAUCHITO/GIL quedan en dos líneas, en desktop en una */
   color: var(--crema);
   text-shadow: 0 0 60px rgba(204,0,0,0.6), 0 2px 4px rgba(0,0,0,0.8);
   margin-bottom: 0.3em;
 }
 
+/* Cada palabra nunca se parte en el medio */
 .hero-titulo .palabra {
   display: inline-block;
+  white-space: nowrap;
 }
 
 .hero-subtitulo {
