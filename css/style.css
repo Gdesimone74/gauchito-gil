@@ -233,19 +233,18 @@ ul  { list-style: none; }
 
 .hero-titulo {
   font-family: var(--font-titulo);
-  font-size: clamp(2.5rem, 8vw, 6.5rem);
+  font-size: clamp(3rem, 8vw, 4.5rem);
   font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.06em;
+  line-height: 1.05;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
   color: var(--crema);
   text-shadow: 0 0 60px rgba(204,0,0,0.6), 0 2px 4px rgba(0,0,0,0.8);
   margin-bottom: 0.3em;
 }
 
-/* Cada palabra animada no se parte internamente */
 .hero-titulo .palabra {
   display: inline-block;
-  white-space: nowrap;
 }
 
 .hero-subtitulo {
